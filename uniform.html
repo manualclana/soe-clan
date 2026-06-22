@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>База Данных Клана | War Tycoon</title>
+    <style>
+        html { scroll-behavior: smooth; }
+        :root {
+            --bg-dark: #0f1115;       
+            --bg-card: #161920;       
+            --primary-neon: #00ffcc;  
+            --text-main: #e2e8f0;     
+            --text-muted: #94a3b8;    
+            --border-color: #2a313d;  
+            --accent-red: #ff4a4a;    
+            --accent-green: #38bdf8;
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg-dark); color: var(--text-main); font-family: var(--font-family); line-height: 1.6; padding: 20px; }
+        
+        /* ГЛАВНОЕ МЕНЮ НАВИГАЦИИ */
+        nav { max-width: 950px; margin: 0 auto 20px auto; background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; text-align: center; }
+        nav.nav-bottom { grid-template-columns: repeat(4, 1fr); margin-top: -12px; margin-bottom: 25px; }
+        nav a { color: var(--text-main); text-decoration: none; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 5px; border-radius: 4px; transition: all 0.3s ease; border: 1px solid transparent; }
+        nav a:hover, nav a.active { color: var(--bg-dark); background-color: var(--primary-neon); box-shadow: 0 0 15px rgba(0, 255, 204, 0.3); }
+        
+        .container { max-width: 950px; margin: 0 auto; background-color: var(--bg-card); padding: 40px; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); }
+        hr { border: 0; height: 1px; background: linear-gradient(to right, transparent, var(--border-color), transparent); margin: 30px 0; }
+        header { text-align: center; position: relative; margin-bottom: 25px; }
+        .title { font-size: 2.3rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: #ffffff; text-shadow: 0 0 15px rgba(0, 255, 204, 0.2); }
+        .abbreviation { color: var(--primary-neon); }
+        .subtitle { font-size: 1rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+        .document-type { font-size: 1.2rem; color: var(--primary-neon); font-weight: 600; margin-bottom: 15px; }
+        .status { display: inline-block; background: rgba(0, 255, 204, 0.05); color: var(--primary-neon); padding: 4px 12px; border-radius: 4px; border: 1px solid rgba(0, 255, 204, 0.2); font-weight: bold; font-size: 0.85rem; }
+        
+        .discord-button { display: inline-flex; align-items: center; gap: 6px; position: absolute; top: 0; right: 0; background: transparent; color: var(--primary-neon); border: 1px solid var(--primary-neon); padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; transition: all 0.3s ease; }
+        .discord-button:hover { background: var(--primary-neon); color: var(--bg-dark); }
+        
+        .table-of-contents { background: rgba(0, 0, 0, 0.2); padding: 25px; border-radius: 8px; border-left: 4px solid var(--primary-neon); margin-bottom: 30px; }
+        .content-title { font-size: 1.1rem; text-transform: uppercase; margin-bottom: 15px; color: #ffffff; }
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; list-style: none; }
+        .content-grid a { color: var(--text-main); text-decoration: none; font-weight: 500; transition: all 0.2s ease; }
+        .content-grid a:hover { color: var(--primary-neon); padding-left: 5px; }
+        
+        .section { margin-bottom: 25px; padding: 20px; background: rgba(255, 255, 255, 0.01); border-radius: 8px; border: 1px solid var(--border-color); }
+        .section h4 { font-size: 1.1rem; color: var(--primary-neon); margin-bottom: 10px; text-transform: uppercase; }
+        .section p { color: var(--text-main); font-size: 0.95rem; background: rgba(0, 0, 0, 0.15); padding: 12px; border-radius: 6px; border-left: 3px solid var(--border-color); }
+        
+        .footer { text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-top: 15px; }
+        
+        @media (max-width: 768px) {
+            nav, nav.nav-bottom { grid-template-columns: 1fr 1fr; }
+            .content-grid { grid-template-columns: 1fr; }
+            .discord-button { position: static; display: flex; margin: 0 auto 15px auto; width: max-content; }
+            .title { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav><a href="index.html">Главная</a><a href="rules.html">Правила</a><a href="leadership.html">Штаб</a><a href="diplomacy.html">Дипломатия</a><a href="uniform.html" class="active">Форма</a></nav>
+    <nav class="nav-bottom"><a href="specops.html">Спецотряды</a><a href="tickets.html">Рапорты/Жалобы</a><a href="apply.html">Заявка</a><a href="academy.html">Академия</a></nav>
+
+    <div class="container">
+        <header>
+            <div class="title">Милитари Экипировка <span class="abbreviation">🎨</span></div>
+            <div class="document-type">Утвержденный регламент внешнего вида техники и бойцов</div>
+        </header>
+        <hr>
+        <div class="section">
+            <h4>👕 Форма Личного Состава</h4>
+            <p>Основной камуфляж для пехоты в игре: <strong>Digital Urban (Городской цифровой)</strong> или темно-серый сет милитари одежды. Аватар должен содержать аббревиатуру [SoE] в никнейме или отображать официальный клановый бейдж.</p>
+        </div>
+        <div class="section">
+            <h4>🚁 Раскраска Военной Техники</h4>
+            <p>• Наземная техника (Танки Abrams/Транспорт): Тёмно-зеленый или матовый черный.<br>• Воздушный флот (Вертолеты Eurocopter/Истребители): Камуфляж "Midnight" (Ночной стелс).</p>
+        </div>
+        <div class="footer">&copy; 2026 Sphere of Electricity. Интендантская служба.</div>
+    </div>
+</body>
